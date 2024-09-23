@@ -53,6 +53,7 @@ def extract_sections_by_elements():
     
             # Store the data in the dictionary
             element_data[element_name] = element_df
+            element_df.columns = [col.split('.')[0].split(':')[0] for col in element_df.columns]
     
         # Store the element-wise split data for this section
         sections_data[section] = element_data
