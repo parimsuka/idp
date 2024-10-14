@@ -1,0 +1,19 @@
+#Static angle of repose analyst settings (Units)
+#
+#Total simulation time (s)
+3
+#Low domain limit (m)
+0.15
+#High domain limit (m)
+0.35
+#Bin diameter(m)
+0.02
+#Number of radial measurements
+8
+#Create results report?
+Yes
+#Create summary report of multiple results reports?
+Yes
+#Plot figures?
+Yes
+#
