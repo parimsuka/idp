@@ -3,10 +3,11 @@
 from data.data_preprocessing import load_and_split_data
 from data.models.evaluate_model import evaluate_model
 from sklearn.svm import SVR
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import GridSearchCV
+import numpy as np
 
-scaler = StandardScaler()
+scaler = MinMaxScaler()
 
 def svr_model(X_train, X_test, y_train, y_test):
     print('Support Vector Regression')
@@ -16,11 +17,11 @@ def svr_model(X_train, X_test, y_train, y_test):
 
 def svr_tuned(X_train, X_test, y_train, y_test):
     # Parameters for SVR
-    svr_params = {
-        'kernel': ['rbf', 'linear'],
-        'C': [0.1, 1, 10],
-        'epsilon': [0.01, 0.1, 1]
-    }
+    svr_params = [
+         {'C': np.logspace(-4, 3, 8), 'kernel': ['linear']},
+         {'C': np.logspace(-4, 3, 8), 'gamma': np.logspace(-4, 3, 8), 'kernel': ['rbf']},
+         {'C': np.logspace(-4, 3, 8), 'degree': [1, 2, 3, 4, 5], 'kernel': ['poly']},
+    ]
     svr_grid = GridSearchCV(SVR(), svr_params, cv=5,
                             scoring='neg_mean_squared_error', n_jobs=-1)
     svr_grid.fit(scaler.fit_transform(X_train), y_train)

@@ -1,8 +1,11 @@
 # xgboost_model.py
 
 from data.models.evaluate_model import evaluate_model
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import GridSearchCV
 import xgboost as xgb
+
+scaler = MinMaxScaler()
 
 def xgboost_model(X_train, X_test, y_train, y_test):
     print('XGBoost Regression')
@@ -10,7 +13,7 @@ def xgboost_model(X_train, X_test, y_train, y_test):
                               colsample_bytree=0.3, learning_rate=0.1, 
                               max_depth=5, alpha=10, n_estimators=200, random_state=42)
     xg_reg, y_pred, mse, mae, r2 = evaluate_model(
-        xg_reg, X_train, X_test, y_train, y_test)
+        xg_reg, X_train, X_test, y_train, y_test, scaler=scaler)
     return xg_reg, y_pred, mse, mae, r2
 
 def xgboost_tuned(X_train, X_test, y_train, y_test):
@@ -29,5 +32,5 @@ def xgboost_tuned(X_train, X_test, y_train, y_test):
     print(f"Best Parameters for XGBoost: {grid_search_xgb.best_params_}")
     best_model = grid_search_xgb.best_estimator_
     best_model, y_pred, mse, mae, r2 = evaluate_model(
-        best_model, X_train, X_test, y_train, y_test)
+        best_model, X_train, X_test, y_train, y_test, scaler=scaler)
     return best_model, y_pred, mse, mae, r2
