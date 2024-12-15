@@ -30,4 +30,4 @@ Relevant literature and references are included in the `docs/` directory and cit
 ---
 
 **Contact:**  
-For questions, comments, or collaboration inquiries, please contact [Your Name] at [Your Email]. 
+For questions, comments, or collaboration inquiries, please contact me at sukaparim@gmail.com. 
